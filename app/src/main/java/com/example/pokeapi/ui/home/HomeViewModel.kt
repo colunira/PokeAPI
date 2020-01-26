@@ -3,11 +3,14 @@ package com.example.pokeapi.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.pokeapi.model.Pokemon
 
 class HomeViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is My Pokemon Fragment"
+
+    fun loadPokemons(): LiveData<List<Pokemon>> {
+        val pokemons = MutableLiveData<List<Pokemon>>()
+        pokemons.value= listOf(Pokemon(), Pokemon())
+        return pokemons
     }
-    val text: LiveData<String> = _text
 }
