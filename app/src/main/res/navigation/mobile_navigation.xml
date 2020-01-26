@@ -38,6 +38,6 @@
     <fragment
         android:id="@+id/nav_send"
         android:name="com.example.pokeapi.ui.send.SendFragment"
-        android:label="@string/menu_send"
+        android:label="dupa "
         tools:layout="@layout/fragment_send" />
 </navigation>
