@@ -1,4 +1,4 @@
-package com.example.pokeapi.ui.send
+package com.example.pokeapi.ui.one
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.pokeapi.R
 
-class SendFragment : Fragment() {
+class GenerationOneFragment : Fragment() {
 
-    private lateinit var sendViewModel: SendViewModel
+    private lateinit var generationOneViewModel: GenerationOneViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        sendViewModel =
-            ViewModelProviders.of(this).get(SendViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_send, container, false)
-        val textView: TextView = root.findViewById(R.id.text_send)
-        sendViewModel.text.observe(this, Observer {
+        generationOneViewModel =
+            ViewModelProviders.of(this).get(GenerationOneViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_gallery, container, false)
+        val textView: TextView = root.findViewById(R.id.text_gallery)
+        generationOneViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root

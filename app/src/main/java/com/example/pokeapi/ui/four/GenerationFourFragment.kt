@@ -1,4 +1,4 @@
-package com.example.pokeapi.ui.gallery
+package com.example.pokeapi.ui.four
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.pokeapi.R
 
-class GalleryFragment : Fragment() {
+class GenerationFourFragment : Fragment() {
 
-    private lateinit var galleryViewModel: GalleryViewModel
+    private lateinit var generationFourViewModel: GenerationFourViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        galleryViewModel =
-            ViewModelProviders.of(this).get(GalleryViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_gallery, container, false)
-        val textView: TextView = root.findViewById(R.id.text_gallery)
-        galleryViewModel.text.observe(this, Observer {
+        generationFourViewModel =
+            ViewModelProviders.of(this).get(GenerationFourViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_share, container, false)
+        val textView: TextView = root.findViewById(R.id.text_share)
+        generationFourViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root

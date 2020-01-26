@@ -13,31 +13,26 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.example.pokeapi.ui.gallery.GalleryFragment"
+        android:name="com.example.pokeapi.ui.one.GenerationOneFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.pokeapi.ui.slideshow.SlideshowFragment"
+        android:name="com.example.pokeapi.ui.two.GenerationTwoFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 
     <fragment
         android:id="@+id/nav_tools"
-        android:name="com.example.pokeapi.ui.tools.ToolsFragment"
+        android:name="com.example.pokeapi.ui.three.GenerationThreeFragment"
         android:label="@string/menu_tools"
         tools:layout="@layout/fragment_tools" />
 
     <fragment
         android:id="@+id/nav_share"
-        android:name="com.example.pokeapi.ui.share.ShareFragment"
+        android:name="com.example.pokeapi.ui.four.GenerationFourFragment"
         android:label="@string/menu_share"
         tools:layout="@layout/fragment_share" />
 
-    <fragment
-        android:id="@+id/nav_send"
-        android:name="com.example.pokeapi.ui.send.SendFragment"
-        android:label="dupa "
-        tools:layout="@layout/fragment_send" />
 </navigation>

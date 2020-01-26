@@ -3,8 +3,28 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
     <color name="pokemonOrange">#F25F29</color>
     <color name="pokemonYellow">#F2E205</color>
     <color name="pokemonBlue">#72F2B6</color>
     <color name="pokemonDark">#592A3B</color>
+
+    <color name="typeFire">#f08030</color>
+    <color name="typeNormal">#a8a878</color>
+    <color name="typeWater">#6890f0</color>
+    <color name="typeGrass">#78c850</color>
+    <color name="typeElectric">#78c850</color>
+    <color name="typeIce">#98d8d8</color>
+    <color name="typeFighting">#c03028</color>
+    <color name="typePoison">#a040a0</color>
+    <color name="typeGround">#e0c068</color>
+    <color name="typeFlying">#a890f0</color>
+    <color name="typePsychic">#f85888</color>
+    <color name="typeBug">#a8b820</color>
+    <color name="typeRock">#b8a038</color>
+    <color name="typeGhost">#705898</color>
+    <color name="typeDark">#705848</color>
+    <color name="typeDragon">#7038f8</color>
+    <color name="typeSteel">#b8b8d0</color>
+    <color name="typeFairy">#f0b6bc</color>
 </resources>

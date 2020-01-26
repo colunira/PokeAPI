@@ -33,8 +33,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_favourite" />
-                            <entry key="sourceFile" value="C:\Users\student" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_hp" />
+                            <entry key="sourceFile" value="E:\Studia\Semestr-V\AMSA\PokeApi\heart.svg" />
                           </map>
                         </option>
                       </PersistentState>
