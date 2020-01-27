@@ -52,6 +52,8 @@ class HomeFragment : Fragment() {
             }
         })
 
+        val remote = Remote()
+        remote.getGenerationPokemons(1)
 
     }
 }

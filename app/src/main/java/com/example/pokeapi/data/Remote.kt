@@ -29,7 +29,7 @@ class Remote {
                 response: Response<Generation>
             ) {
                 generation = response.body()
-                Log.v("DOWEJ",generation.toString())
+                Log.v("DOWEJ",generation!!.pokemons[0].name)
             }
         })
 
