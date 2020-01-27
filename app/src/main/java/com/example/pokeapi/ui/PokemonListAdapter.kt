@@ -20,7 +20,12 @@ class PokemonListAdapter(val pokemons: List<Pokemon>) : RecyclerView.Adapter<Pok
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val pokemon = pokemons[position]
         holder.pokemonName.text=pokemon.name
-
+        holder.pokemonAttack.text=pokemon.stats[pokemon.ATTACK].value.toString()
+        holder.pokemonDefense.text=pokemon.stats[pokemon.DEFENSE].value.toString()
+        holder.pokemonHP.text=pokemon.stats[pokemon.HP].value.toString()
+        holder.pokemonSpeed.text=pokemon.stats[pokemon.SPEED].value.toString()
+        holder.pokemonType1.text=pokemon.type[0].name
+        holder.pokemonType2.text=pokemon.type[1].name
         holder.favourite.setOnClickListener{
 
         }

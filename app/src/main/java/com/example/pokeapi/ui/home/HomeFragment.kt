@@ -15,7 +15,7 @@ import com.example.pokeapi.R
 import com.example.pokeapi.ui.PokemonListAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 import androidx.recyclerview.widget.DividerItemDecoration
-
+import com.example.pokeapi.data.Remote
 
 
 class HomeFragment : Fragment() {
@@ -51,5 +51,7 @@ class HomeFragment : Fragment() {
                 Log.v("NIE","DZIALA")
             }
         })
+
+
     }
 }
