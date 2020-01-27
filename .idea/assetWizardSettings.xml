@@ -188,8 +188,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_power" />
-                            <entry key="sourceFile" value="E:\Studia\Semestr-V\AMSA\PokeApi\thunder.svg" />
+                            <entry key="outputName" value="ic_damage" />
+                            <entry key="sourceFile" value="E:\Studia\Semestr-V\AMSA\PokeApi\punch.svg" />
                           </map>
                         </option>
                       </PersistentState>
