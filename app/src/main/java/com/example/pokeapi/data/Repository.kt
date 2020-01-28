@@ -1,10 +1,9 @@
 package com.example.pokeapi.data
 
+import android.content.Context
 import android.util.Log
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
+import androidx.lifecycle.*
+import com.example.pokeapi.MainActivity
 import com.example.pokeapi.model.Generation
 import com.example.pokeapi.model.Pokemon
 import com.example.pokeapi.model.PokemonSpecies
@@ -21,23 +20,23 @@ class Repository {
         }
     }
 
-    // Data sources
-    val remote = Remote()
 
-    fun getGeneration(id: Int): MutableLiveData<Generation> {
-        return remote.getGeneration(id)
-//        val pokemons = MutableLiveData<List<Pokemon>>()
-//        val pokemonsList = mutableListOf<Pokemon>()
-//
-//        for (pokemon in generation.value!!.pokemons) {
-//            Log.v("POBIERAM", pokemon.name)
-//            val p = remote.getPokemon(pokemon.name)
-//            pokemonsList.add(p!!)
-//        }
-
-//        pokemons.value=pokemonsList
+    fun getPokemonNames(gen: Int, context: Context? = null): LiveData<List<String>> {
+        return when (gen) {
+            0 -> {
+                val db = PokemonDatabase.getInstance(context!!)
+                db.pokemonDao().getAllPokemons()
+            }
+            in 1..4 -> {
+                val remote = Remote()
+                remote.getGeneration(gen)
+            }
+            else -> MutableLiveData<List<String>>()
+        }
     }
-    fun getPokemons(pokemons: MutableList<PokemonSpecies>): MutableLiveData<List<Pokemon>> {
+
+    fun getPokemons(pokemons: List<String>): LiveData<List<Pokemon>> {
+        val remote = Remote()
         return remote.getPokemons(pokemons)
     }
 }

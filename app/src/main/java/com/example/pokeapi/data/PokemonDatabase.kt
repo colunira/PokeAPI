@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.pokeapi.model.Pokemon
 
-@Database(entities = [Pokemon::class], version = 1, exportSchema = false)
+@Database(entities = [Pokemon::class], version = 2, exportSchema = false)
 abstract class PokemonDatabase: RoomDatabase() {
     abstract fun pokemonDao(): PokemonDao
 
@@ -23,7 +23,7 @@ abstract class PokemonDatabase: RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         PokemonDatabase::class.java,
-                        "recipes_history_database"
+                        "pokemon_database"
                     )
                         .fallbackToDestructiveMigration()
                         .build()

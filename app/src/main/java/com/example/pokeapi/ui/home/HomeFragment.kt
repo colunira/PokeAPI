@@ -34,26 +34,15 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        homeViewModel.getGeneration().observe(this, Observer { gen ->
-            if (gen != null) {
-                homeViewModel.getPokemons(gen.pokemons).observe(this, Observer { data ->
-                    if (data != null) {
+        homeViewModel.getPokemonNames(0, context).observe(this, Observer { favs ->
+            if (favs != null) {
+                homeViewModel.getPokemons(favs).observe(this, Observer { pokes ->
+                    if (pokes != null) {
                         pokemonList.layoutManager =
                             LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-                        pokemonList.adapter = PokemonListAdapter(data, homeViewModel)
-                        val dividerItemDecoration = DividerItemDecoration(
-                            pokemonList.getContext(),
-                            1
-                        )
-                        pokemonList.addItemDecoration(dividerItemDecoration)
-                    }
-                    else {
-                        Log.v("NIE","DZIALA")
+                        pokemonList.adapter = PokemonListAdapter(pokes, context!!)
                     }
                 })
-            }
-            else {
-                Log.v("NIE","MA GENERACJI")
             }
         })
     }

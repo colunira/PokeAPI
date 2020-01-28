@@ -1,26 +1,61 @@
 package com.example.pokeapi.model
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import com.google.gson.annotations.SerializedName
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "pokemons")
 class Pokemon {
-    val SPEED=0
-    val DEFENSE=3
-    val ATTACK=4
-    val HP=5
+    var SPEED=0
+    var DEFENSE=3
+    var ATTACK=4
+    var HP=5
+
     @PrimaryKey
     @SerializedName("id")
-    val id: Int = 0
-    @SerializedName("name") val name: String = ""
-    @SerializedName("base_experience") val experience: Int = 0
-    @SerializedName("height") val height: Int = 0
-    @SerializedName("weight") val weight: Int = 0
-    @SerializedName("abilities") val abilities: MutableList<Ability> = mutableListOf()
-    @SerializedName("moves") val moves: MutableList<Move> = mutableListOf()
-    @SerializedName("sprites") val images: Sprite = Sprite()
-    @SerializedName("stats") val stats: MutableList<PokemonStat> = mutableListOf()
-    @SerializedName("types") val types: MutableList<PokemonType> = mutableListOf()
+    var id: Int = 0
+
+    @SerializedName("name")
+    var name: String = ""
+
+    @Ignore
+    @SerializedName("base_experience")
+    var experience: Int = 0
+
+    @Ignore
+    @SerializedName("height")
+    var height: Int = 0
+
+    @Ignore
+    @SerializedName("weight")
+    var weight: Int = 0
+
+    @Ignore
+    @SerializedName("abilities")
+    var abilities: MutableList<Ability> = mutableListOf()
+
+    @Ignore
+    @SerializedName("moves")
+    var moves: MutableList<Move> = mutableListOf()
+
+    @Ignore
+    @SerializedName("sprites")
+    var images: Sprite = Sprite()
+
+    @Ignore
+    @SerializedName("stats")
+    var stats: MutableList<PokemonStat> = mutableListOf()
+
+    @Ignore
+    @SerializedName("types")
+    var types: MutableList<PokemonType> = mutableListOf()
+
+    @ColumnInfo(name = "isFavourite")
     var isFavourite: Boolean = false
+
+    override fun toString(): String {
+        return "$id $name"
+    }
 }

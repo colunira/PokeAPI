@@ -1,6 +1,7 @@
 package com.example.pokeapi.data
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.pokeapi.model.Generation
 import com.example.pokeapi.model.Pokemon
@@ -17,25 +18,28 @@ class Remote {
         .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create())).build()
     val pokeService = retrofit.create(PokeAPI::class.java)
 
-    fun getGeneration(id: Int): MutableLiveData<Generation> {
-        val generation: MutableLiveData<Generation> = MutableLiveData()
+    fun getGeneration(id: Int): LiveData<List<String>> {
+        val returnNames = MutableLiveData<List<String>>()
+        val names = mutableListOf<String>()
         val call = pokeService.getGeneration(id)
         call.enqueue(object : Callback<Generation> {
             override fun onFailure(call: Call<Generation>, t: Throwable) {
             }
-            override fun onResponse(
-                call: Call<Generation>,
-                response: Response<Generation>
-            ) {
-                generation.value = response.body()
+            override fun onResponse(call: Call<Generation>, response: Response<Generation>) {
+                if (response.isSuccessful){
+                    response.body()!!.pokemons.forEach {
+                        poke -> names.add(poke.name)
+                    }
+                    returnNames.value = names
+                }
             }
         })
 
-        return generation
+        return returnNames
     }
 
     fun getPokemon(name: String): MutableLiveData<Pokemon> {
-        var pokemon: MutableLiveData<Pokemon> = MutableLiveData()
+        val pokemon: MutableLiveData<Pokemon> = MutableLiveData()
         val call = pokeService.getPokemonByName(name)
         call.enqueue(object : Callback<Pokemon> {
             override fun onFailure(call: Call<Pokemon>, t: Throwable) {
@@ -52,11 +56,12 @@ class Remote {
 
         return pokemon
     }
-    fun getPokemons(pokemons: MutableList<PokemonSpecies>): MutableLiveData<List<Pokemon>> {
-        var pokemon: MutableLiveData<List<Pokemon>> = MutableLiveData()
-        var list: MutableList<Pokemon> = mutableListOf()
+
+    fun getPokemons(pokemons: List<String>): LiveData<List<Pokemon>> {
+        val pokemon: MutableLiveData<List<Pokemon>> = MutableLiveData()
+        val list: MutableList<Pokemon> = mutableListOf()
         for (p in pokemons) {
-            val call = pokeService.getPokemonByName(p.name)
+            val call = pokeService.getPokemonByName(p)
             call.enqueue(object : Callback<Pokemon> {
                 override fun onFailure(call: Call<Pokemon>, t: Throwable) {
                 }
