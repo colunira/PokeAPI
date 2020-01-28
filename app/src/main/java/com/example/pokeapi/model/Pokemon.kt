@@ -18,5 +18,6 @@ class Pokemon {
     @SerializedName("moves") val moves: MutableList<Move> = mutableListOf()
     @SerializedName("sprites") val images: Sprite = Sprite()
     @SerializedName("stats") val stats: MutableList<PokemonStat> = mutableListOf()
-    @SerializedName("type") val type: MutableList<Type> = mutableListOf()
+    @SerializedName("types") val types: MutableList<PokemonType> = mutableListOf()
+    var isFavourite: Boolean = false
 }

@@ -22,14 +22,12 @@ class Remote {
         val call = pokeService.getGeneration(id)
         call.enqueue(object : Callback<Generation> {
             override fun onFailure(call: Call<Generation>, t: Throwable) {
-                Log.v("PokeAPI ERROR", t.toString())
             }
             override fun onResponse(
                 call: Call<Generation>,
                 response: Response<Generation>
             ) {
                 generation.value = response.body()
-                Log.v("DUPA", generation.value!!.name)
             }
         })
 
@@ -61,7 +59,6 @@ class Remote {
             val call = pokeService.getPokemonByName(p.name)
             call.enqueue(object : Callback<Pokemon> {
                 override fun onFailure(call: Call<Pokemon>, t: Throwable) {
-                    Log.v("PokeAPI ERROR", t.toString())
                 }
                 override fun onResponse(
                     call: Call<Pokemon>,
@@ -69,7 +66,6 @@ class Remote {
                 ) {
                     list.add(response.body()!!)
                     pokemon.value = list
-                    Log.v("DUPA", response.body()!!.name)
                 }
             })
         }

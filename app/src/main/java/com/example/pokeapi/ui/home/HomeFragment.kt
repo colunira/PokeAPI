@@ -40,7 +40,7 @@ class HomeFragment : Fragment() {
                     if (data != null) {
                         pokemonList.layoutManager =
                             LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-                        pokemonList.adapter = PokemonListAdapter(data)
+                        pokemonList.adapter = PokemonListAdapter(data, homeViewModel)
                         val dividerItemDecoration = DividerItemDecoration(
                             pokemonList.getContext(),
                             1
