@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -15,8 +14,7 @@ import com.example.pokeapi.R
 import com.example.pokeapi.ui.PokemonListAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.example.pokeapi.data.Remote
-
+import com.example.pokeapi.model.Pokemon
 
 class HomeFragment : Fragment() {
 
@@ -36,24 +34,27 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        homeViewModel.loadPokemons().observe(this, Observer { data ->
-            if (data != null) {
-                pokemonList.layoutManager =
-                    LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-                pokemonList.adapter = PokemonListAdapter(data)
-                val dividerItemDecoration = DividerItemDecoration(
-                    pokemonList.getContext(),
-                    1
-                )
-                pokemonList.addItemDecoration(dividerItemDecoration)
+        homeViewModel.getGeneration().observe(this, Observer { gen ->
+            if (gen != null) {
+                homeViewModel.getPokemons(gen.pokemons).observe(this, Observer { data ->
+                    if (data != null) {
+                        pokemonList.layoutManager =
+                            LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+                        pokemonList.adapter = PokemonListAdapter(data, homeViewModel)
+                        val dividerItemDecoration = DividerItemDecoration(
+                            pokemonList.getContext(),
+                            1
+                        )
+                        pokemonList.addItemDecoration(dividerItemDecoration)
+                    }
+                    else {
+                        Log.v("NIE","DZIALA")
+                    }
+                })
             }
             else {
-                Log.v("NIE","DZIALA")
+                Log.v("NIE","MA GENERACJI")
             }
         })
-
-        val remote = Remote()
-        remote.getGenerationPokemons(1)
-
     }
 }
