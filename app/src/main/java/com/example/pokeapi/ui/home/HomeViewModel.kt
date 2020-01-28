@@ -21,12 +21,4 @@ class HomeViewModel : ViewModel() {
 
     var generationID: MutableLiveData<Int> = MutableLiveData()
 
-
-
-    fun getGeneration(id: Int): LiveData<Generation> {
-        return repository.getGeneration(id)
-    }
-    fun getPokemons(pokemons: MutableList<PokemonSpecies>): LiveData<List<Pokemon>> {
-        return repository.getPokemons(pokemons)
-    }
 }

@@ -13,17 +13,11 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
-import com.example.pokeapi.ui.home.HomeFragment
 import com.example.pokeapi.ui.home.HomeViewModel
-import android.view.MenuItem
-import android.widget.Toast
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -53,7 +47,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         )
 
         if (savedInstanceState == null) {
-            homeViewModel.generationID.value = 1
+            homeViewModel.generationID.value = 0
         } else {
             homeViewModel.generationID.value = savedInstanceState.getInt("id")
         }
@@ -65,8 +59,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
-        homeViewModel.generationID.value = 2
-        Toast.makeText(this,homeViewModel.generationID.value.toString(), Toast.LENGTH_LONG).show()
+        homeViewModel.generationID.value = p0.numericShortcut.toString().toInt()
         return true
     }
 

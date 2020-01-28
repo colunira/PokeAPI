@@ -13,13 +13,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pokeapi.MainActivity
 import com.example.pokeapi.R
 import com.example.pokeapi.data.PokemonDatabase
+import com.example.pokeapi.model.NavigableFragment
 import com.example.pokeapi.model.Pokemon
 import com.squareup.picasso.Picasso
 
 class PokemonListAdapter(
-    val pokemons: List<Pokemon>, /*viewModel: ViewModel,*/
-    private val context: Context
-) : RecyclerView.Adapter<PokemonListAdapter.ViewHolder>() {
+    val pokemons: List<Pokemon>,
+    private val context: Context,
+    private val parent: NavigableFragment
+): RecyclerView.Adapter<PokemonListAdapter.ViewHolder>() {
 
     val picasso = Picasso.get()
     
@@ -65,9 +67,9 @@ class PokemonListAdapter(
                 pokemon.isFavourite = true
             }
             Thread { Log.v("gwiwazdka", "dupa") }.start()
-        }
-        holder.itemView.setOnClickListener{
             parent.navigateToPokemon()
+        }
+
 
         holder.pokemonName.setOnClickListener {
             val db = PokemonDatabase.getInstance(context)
