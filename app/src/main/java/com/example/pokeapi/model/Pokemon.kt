@@ -1,14 +1,18 @@
 package com.example.pokeapi.model
 
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
+import androidx.room.PrimaryKey
 
-
+@Entity(tableName = "pokemons")
 class Pokemon {
     val SPEED=0
     val DEFENSE=3
     val ATTACK=4
     val HP=5
-    @SerializedName("id") val id: Int = 0
+    @PrimaryKey
+    @SerializedName("id")
+    val id: Int = 0
     @SerializedName("name") val name: String = ""
     @SerializedName("base_experience") val experience: Int = 0
     @SerializedName("height") val height: Int = 0
