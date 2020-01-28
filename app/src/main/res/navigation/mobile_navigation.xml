@@ -34,5 +34,6 @@
         android:name="com.example.pokeapi.ui.four.GenerationFourFragment"
         android:label="@string/menu_share"
         tools:layout="@layout/fragment_share" />
+    <fragment android:id="@+id/placeholder" />
 
 </navigation>
