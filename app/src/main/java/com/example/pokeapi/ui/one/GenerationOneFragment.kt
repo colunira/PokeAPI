@@ -12,9 +12,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokeapi.R
 import com.example.pokeapi.ui.PokemonListAdapter
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.pokeapi.R
+import com.example.pokeapi.model.NavigableFragment
+import com.example.pokeapi.ui.PokemonListAdapter
+import com.example.pokeapi.ui.home.HomeFragmentDirections
 import kotlinx.android.synthetic.main.fragment_home.*
 
-class GenerationOneFragment : Fragment() {
+class GenerationOneFragment : Fragment(), NavigableFragment {
 
     private lateinit var generationOneViewModel: GenerationOneViewModel
 
@@ -42,5 +50,33 @@ class GenerationOneFragment : Fragment() {
                 })
             }
         })
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+//        generationOneViewModel.getGeneration().observe(this, Observer { gen ->
+//            if (gen != null) {
+//                generationOneViewModel.getPokemons(gen.pokemons).observe(this, Observer { data ->
+//                    if (data != null) {
+//                        pokemonList.layoutManager =
+//                            LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+//                        pokemonList.adapter = PokemonListAdapter(data, this)
+//                    }
+//                })
+//            }
+//        })
+//        pokemonList.addItemDecoration(
+//            DividerItemDecoration(
+//                pokemonList.getContext(),
+//                DividerItemDecoration.VERTICAL
+//            )
+//        )
+    }
+
+    override fun navigateToPokemon() {
+        val action =
+            HomeFragmentDirections.navToPokemon()
+        this.findNavController().navigate(action)
     }
 }

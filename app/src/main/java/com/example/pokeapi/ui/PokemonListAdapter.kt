@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokeapi.MainActivity
@@ -31,7 +32,6 @@ class PokemonListAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val pokemon = pokemons[position]
 
-
         // Get pokemon image
         picasso.load(pokemon.images.url).resize(200,200)
             .into(holder.image)
@@ -42,10 +42,9 @@ class PokemonListAdapter(
         holder.pokemonDefense.text=pokemon.stats[pokemon.DEFENSE].value.toString()
         holder.pokemonHP.text=pokemon.stats[pokemon.HP].value.toString()
         holder.pokemonSpeed.text=pokemon.stats[pokemon.SPEED].value.toString()
-        Log.v("POKE TYPE", pokemon.types[0].type.toString())
-        holder.pokemonType1.text = pokemon.types[0].type.name
-        if (pokemon.types.size > 1) {
-            holder.pokemonType2.text = pokemon.types[1].type.name
+        holder.pokemonType1.text=pokemon.types[0].type.name
+        if (pokemon.types.size>1) {
+            holder.pokemonType2.text=pokemon.types[1].type.name
         }
 
         //OnClick listeners
@@ -67,6 +66,8 @@ class PokemonListAdapter(
             }
             Thread { Log.v("gwiwazdka", "dupa") }.start()
         }
+        holder.itemView.setOnClickListener{
+            parent.navigateToPokemon()
 
         holder.pokemonName.setOnClickListener {
             val db = PokemonDatabase.getInstance(context)

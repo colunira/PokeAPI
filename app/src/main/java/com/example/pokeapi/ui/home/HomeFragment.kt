@@ -1,22 +1,23 @@
 package com.example.pokeapi.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokeapi.R
 import com.example.pokeapi.ui.PokemonListAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.example.pokeapi.model.Pokemon
+import com.example.pokeapi.model.NavigableFragment
 
-class HomeFragment : Fragment() {
+
+class HomeFragment : Fragment(), NavigableFragment {
 
     private lateinit var homeViewModel: HomeViewModel
 
@@ -45,5 +46,17 @@ class HomeFragment : Fragment() {
                 })
             }
         })
+        pokemonList.addItemDecoration(
+            DividerItemDecoration(
+                pokemonList.getContext(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
+    }
+
+    override fun navigateToPokemon() {
+        val action =
+            HomeFragmentDirections.navToPokemon()
+        this.findNavController().navigate(action)
     }
 }
