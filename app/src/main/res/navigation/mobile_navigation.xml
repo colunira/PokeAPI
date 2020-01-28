@@ -21,7 +21,7 @@
         android:id="@+id/nav_gallery"
         android:name="com.example.pokeapi.ui.one.GenerationOneFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gen_one" />
 
     <fragment
         android:id="@+id/nav_slideshow"

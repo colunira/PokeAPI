@@ -2,6 +2,7 @@ package com.example.pokeapi.ui.home
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.pokeapi.data.PokemonDatabase
 import com.example.pokeapi.data.Repository
@@ -18,4 +19,14 @@ class HomeViewModel : ViewModel() {
 
     fun getPokemons(pokemons: List<String>) = repository.getPokemons(pokemons)
 
+    var generationID: MutableLiveData<Int> = MutableLiveData()
+
+
+
+    fun getGeneration(id: Int): LiveData<Generation> {
+        return repository.getGeneration(id)
+    }
+    fun getPokemons(pokemons: MutableList<PokemonSpecies>): LiveData<List<Pokemon>> {
+        return repository.getPokemons(pokemons)
+    }
 }
