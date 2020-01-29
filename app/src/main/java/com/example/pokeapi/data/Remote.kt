@@ -76,16 +76,26 @@ class Remote {
         for (p in pokemons) {
             val call = pokeService.getPokemonByName(p)
             call.enqueue(object : Callback<Pokemon> {
-                override fun onFailure(call: Call<Pokemon>, t: Throwable) {}
+                override fun onFailure(call: Call<Pokemon>, t: Throwable) {
+                    pokemon.value = pokemon.value?.sortedBy { x -> x.id }
+                }
 
                 override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
-                    favs.observe((context as MainActivity), Observer { data ->
-                        if (data.contains(response.body()!!.name))
-                            response.body()!!.isFavourite = true
-                        list.add(response.body()!!)
-                        pokemon.value = list
+
+                    if(response.isSuccessful){
+                        Log.v("POKEMON_RESPONSE_OK",response.message())
+                        favs.observe((context as MainActivity), Observer { data ->
+                            if (data.contains(response.body()!!.name))
+                                response.body()!!.isFavourite = true
+                            list.add(response.body()!!)
+                            pokemon.value = list
+                            pokemon.value = pokemon.value?.sortedBy { x -> x.id }
+                        })
+                    } else {
+                        Log.v("POKEMON_RESPONSE_NOT_OK",response.message())
                         pokemon.value = pokemon.value?.sortedBy { x -> x.id }
-                    })
+                    }
+
 
                 }
             })

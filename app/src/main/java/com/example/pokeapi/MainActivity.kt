@@ -55,13 +55,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             navView.setCheckedItem(R.id.nav_home)
         } else {
             val id = savedInstanceState!!.getInt("id")
-//            navView.menu.forEach { item: MenuItem ->
-//                if (item.numericShortcut.toInt() == id){
-//                    navView.setCheckedItem(item)
-//                }
-//             }
             homeViewModel.generationID.value = id
-
         }
 
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -70,7 +64,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
-//        Toast.makeText(this,"PRZECHODZE",Toast.LENGTH_LONG).show()
         homeViewModel.generationID.value = p0.numericShortcut.toString().toInt()
         drawerLayout.closeDrawer(navView, true)
         return true
