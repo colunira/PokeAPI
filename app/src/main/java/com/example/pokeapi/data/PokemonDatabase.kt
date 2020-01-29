@@ -32,5 +32,9 @@ abstract class PokemonDatabase: RoomDatabase() {
                 return instance
             }
         }
+
+        fun getInstanceWithoutContext(): PokemonDatabase {
+            return INSTANCE!!
+        }
     }
 }

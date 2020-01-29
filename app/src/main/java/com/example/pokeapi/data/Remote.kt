@@ -43,7 +43,9 @@ class Remote {
         return returnNames
     }
 
-    fun getPokemon(name: String): MutableLiveData<Pokemon> {
+    fun getPokemon(name: String, context: Context): MutableLiveData<Pokemon> {
+        val favs =
+            PokemonDatabase.getInstance(context).pokemonDao().getAllFavouritePokemons()
         val pokemon: MutableLiveData<Pokemon> = MutableLiveData()
         val call = pokeService.getPokemonByName(name)
         call.enqueue(object : Callback<Pokemon> {
@@ -55,8 +57,11 @@ class Remote {
                 call: Call<Pokemon>,
                 response: Response<Pokemon>
             ) {
-                pokemon.value = response.body()
-                Log.v("DUPA", pokemon.value!!.name)
+                favs.observe((context as MainActivity), Observer {data ->
+                    if (data.contains(response.body()!!.name))
+                        response.body()!!.isFavourite = true
+                    pokemon.value = response.body()
+                })
             }
         })
 

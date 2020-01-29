@@ -37,9 +37,10 @@ class Repository {
 
     fun getPokemons(pokemons: List<String>, context: Context) = remote.getPokemons(pokemons, context)
 
-    fun getPokemon(pokemonName: String): LiveData<Pokemon> {
-        val remote = Remote()
-        return remote.getPokemon(pokemonName)
-    }
+    fun getPokemon(pokemonName: String, context: Context): LiveData<Pokemon> =  remote.getPokemon(pokemonName, context)
+
+    fun addPokemonToDb(pokemon: Pokemon, context: Context) = PokemonDatabase.getInstance(context).pokemonDao().insert(pokemon)
+
+    fun deletePokemon(pokemon: Pokemon, context: Context) = PokemonDatabase.getInstance(context).pokemonDao().deletePokemon(pokemon)
 
 }
