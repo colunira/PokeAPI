@@ -53,29 +53,27 @@ class PokemonListAdapter(
         holder.favourite.setOnClickListener{
             if (pokemon.isFavourite) {
                 holder.favourite.setImageResource(R.drawable.ic_star_unchecked)
-                Thread {
-                    val db = PokemonDatabase.getInstance(context)
-                    db.pokemonDao().deletePokemon(pokemon)
-                }.start()
+
+                // TODO: Przez te funkcje po kliknieciu w favoutite RecyclerView
+                //      wypełnia się ulubionymi pokemonami zamiast zostać na danej generacji
+//                Thread {
+//                    val db = PokemonDatabase.getInstance(context)
+//                    db.pokemonDao().deletePokemon(pokemon)
+//                }.start()
                 pokemon.isFavourite = false
             } else {
                 holder.favourite.setImageResource(R.drawable.ic_star)
-                Thread {
-                    val db = PokemonDatabase.getInstance(context)
-                    db.pokemonDao().insert(pokemon)
-                }.start()
+//                Thread {
+//                    val db = PokemonDatabase.getInstance(context)
+//                    db.pokemonDao().insert(pokemon)
+//                }.start()
                 pokemon.isFavourite = true
             }
-            Thread { Log.v("gwiwazdka", "dupa") }.start()
-            parent.navigateToPokemon()
         }
 
 
-        holder.pokemonName.setOnClickListener {
-            val db = PokemonDatabase.getInstance(context)
-            db.pokemonDao().getAllPokemons().observe((context as MainActivity), Observer { data ->
-                data?.forEach { pokemon -> Log.v("print pokemon", pokemon.toString()) }
-            })
+        holder.itemView.setOnClickListener {
+            parent.navigateToPokemon()
         }
     }
 

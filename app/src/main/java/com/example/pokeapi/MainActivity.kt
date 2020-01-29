@@ -11,6 +11,8 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.MenuItem
+import android.widget.Toast
+import androidx.core.view.forEach
 import androidx.lifecycle.ViewModelProviders
 import com.example.pokeapi.ui.home.HomeViewModel
 
@@ -45,19 +47,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             ), drawerLayout
         )
 
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null && homeViewModel.generationID.value==null) {
             homeViewModel.generationID.value = 0
+            navView.setCheckedItem(R.id.nav_home)
         } else {
-            homeViewModel.generationID.value = savedInstanceState.getInt("id")
+            val id=savedInstanceState!!.getInt("id")
+//            navView.menu.forEach { item: MenuItem ->
+//                if (item.numericShortcut.toInt() == id){
+//                    navView.setCheckedItem(item)
+//                }
+//             }
+            homeViewModel.generationID.value = id
+
         }
 
         setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setCheckedItem(R.id.nav_home)
         navView.setupWithNavController(navController)
         navView.setNavigationItemSelectedListener(this)
     }
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
+        Toast.makeText(this,"PRZECHODZE",Toast.LENGTH_LONG).show()
         homeViewModel.generationID.value = p0.numericShortcut.toString().toInt()
         drawerLayout.closeDrawer(navView, true)
         return true
