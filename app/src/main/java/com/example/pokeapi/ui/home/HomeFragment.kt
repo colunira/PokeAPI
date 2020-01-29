@@ -1,6 +1,7 @@
 package com.example.pokeapi.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,6 +38,7 @@ class HomeFragment : Fragment(), NavigableFragment {
 
         homeViewModel.generationID.observe(this, Observer {
             homeViewModel.getPokemonNames(homeViewModel.generationID.value!!, context).observe(this, Observer { favs ->
+                favs.forEach { f -> Log.v("FAV POKEMON", f) }
                 if (favs != null) {
                     homeViewModel.getPokemons(favs, context!!).observe(this, Observer { pokes ->
                         if (pokes != null) {

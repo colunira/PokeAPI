@@ -1,26 +1,23 @@
 package com.example.pokeapi.ui
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
-import android.util.Log
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokeapi.MainActivity
 import com.example.pokeapi.R
-import com.example.pokeapi.data.PokemonDatabase
 import com.example.pokeapi.model.NavigableFragment
 import com.example.pokeapi.model.Pokemon
 import com.example.pokeapi.ui.home.HomeViewModel
 import com.squareup.picasso.Picasso
-import java.util.*
 
 class PokemonListAdapter(
     val pokemons: List<Pokemon>,
@@ -82,14 +79,11 @@ class PokemonListAdapter(
                 holder.favourite.setImageResource(R.drawable.ic_star)
                 Thread {
                     viewModel.setFavouritePokemon(pokemon, context)
+
                 }.start()
             }
         }
 
-        //Funkcja do testu!!
-        holder.pokemonName.setOnClickListener {
-            Toast.makeText(context, pokemon.toString(), Toast.LENGTH_SHORT).show()
-        }
 
 
         holder.itemView.setOnClickListener {
@@ -112,4 +106,5 @@ class PokemonListAdapter(
         val favourite = itemView.findViewById<ImageView>(R.id.favourite)
         val image = itemView.findViewById<ImageView>(R.id.imageView9)
     }
+
 }

@@ -83,7 +83,6 @@ class Remote {
                 override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
 
                     if(response.isSuccessful){
-                        Log.v("POKEMON_RESPONSE_OK",response.message())
                         favs.observe((context as MainActivity), Observer { data ->
                             if (data.contains(response.body()!!.name))
                                 response.body()!!.isFavourite = true
@@ -92,11 +91,8 @@ class Remote {
                             pokemon.value = pokemon.value?.sortedBy { x -> x.id }
                         })
                     } else {
-                        Log.v("POKEMON_RESPONSE_NOT_OK",response.message())
                         pokemon.value = pokemon.value?.sortedBy { x -> x.id }
                     }
-
-
                 }
             })
         }
