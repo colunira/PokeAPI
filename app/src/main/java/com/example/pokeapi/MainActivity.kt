@@ -1,6 +1,7 @@
 package com.example.pokeapi
 
 import android.os.Bundle
+import android.util.Log
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         if (savedInstanceState == null && homeViewModel.generationID.value == null) {
             homeViewModel.generationID.value = 0
+            Log.v("USTAWIAM", "NA HOME")
             navView.setCheckedItem(R.id.nav_home)
         } else {
             val id = savedInstanceState!!.getInt("id")
