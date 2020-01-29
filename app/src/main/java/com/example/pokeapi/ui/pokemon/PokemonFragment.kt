@@ -1,5 +1,6 @@
 package com.example.pokeapi.ui.pokemon
 
+import android.graphics.Color
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,7 +14,7 @@ import com.example.pokeapi.ui.home.HomeViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.pokemon_view_fragment.view.*
 import android.widget.ArrayAdapter
-
+import androidx.core.content.ContextCompat
 
 
 class PokemonFragment : Fragment() {
@@ -49,9 +50,20 @@ class PokemonFragment : Fragment() {
                 view.pokemonWeight.text="${pokemon.weight} hg"
                 view.pokemonHeight.text="${pokemon.height} dm"
                 view.pokemonExp.text="${pokemon.experience} EXP"
-                view.pokemonType1.text=pokemon.types[0].type.name
-                if (pokemon.types.size>1) {
-                    view.pokemonType2.text=pokemon.types[1].type.name
+
+                // setup the types
+                var typeName = pokemon.types[0].type.name
+                var color = pokemon.types[0].type.color[typeName]!!
+                view.pokemonType1.text = typeName
+                view.pokemonType1.setBackgroundColor(ContextCompat.getColor(this.context!!, color))
+                if (pokemon.types.size > 1) {
+                    typeName = pokemon.types[1].type.name
+                    color = pokemon.types[1].type.color[typeName]!!
+                    view.pokemonType2.text = typeName
+                    view.pokemonType2.setBackgroundColor(ContextCompat.getColor(this.context!!, color))
+                } else {
+                    view.pokemonType2.text = ""
+                    view.pokemonType2.setBackgroundColor(Color.TRANSPARENT)
                 }
 
                 // setup the abilities

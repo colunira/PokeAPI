@@ -1,6 +1,7 @@
 package com.example.pokeapi.ui
 
 import android.content.Context
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
@@ -48,12 +50,23 @@ class PokemonListAdapter(
         holder.pokemonDefense.text = pokemon.stats[pokemon.DEFENSE].value.toString()
         holder.pokemonHP.text = pokemon.stats[pokemon.HP].value.toString()
         holder.pokemonSpeed.text = pokemon.stats[pokemon.SPEED].value.toString()
-        holder.pokemonType1.text = pokemon.types[0].type.name
+
+        // setup the types
+        var typeName = pokemon.types[0].type.name
+        var color = pokemon.types[0].type.color[typeName]!!
+        holder.pokemonType1.text = typeName
+        holder.pokemonType1.setBackgroundColor(ContextCompat.getColor(this.context, color))
         if (pokemon.types.size > 1) {
-            holder.pokemonType2.text = pokemon.types[1].type.name
+            typeName = pokemon.types[1].type.name
+            color = pokemon.types[1].type.color[typeName]!!
+            holder.pokemonType2.text = typeName
+            holder.pokemonType2.setBackgroundColor(ContextCompat.getColor(this.context, color))
         } else {
             holder.pokemonType2.text = ""
+            holder.pokemonType2.setBackgroundColor(Color.TRANSPARENT)
         }
+
+        //Setup the favourite star
         if (pokemon.isFavourite) holder.favourite.setImageResource(R.drawable.ic_star)
 
         //OnClick listeners
