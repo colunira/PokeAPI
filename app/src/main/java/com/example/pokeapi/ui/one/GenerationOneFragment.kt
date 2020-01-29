@@ -30,6 +30,7 @@ class GenerationOneFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_gen_one, container, false)
     }
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
     }

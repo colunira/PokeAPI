@@ -1,6 +1,7 @@
 package com.example.pokeapi.ui.home
 
 import android.content.Context
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,7 +18,7 @@ class HomeViewModel : ViewModel() {
 
     fun getPokemonNames(gen: Int, context: Context? = null) = repository.getPokemonNames(gen, context)
 
-    fun getPokemons(pokemons: List<String>) = repository.getPokemons(pokemons)
+    fun getPokemons(pokemons: List<String>, context: Context) = repository.getPokemons(pokemons, context)
 
     fun getPokemon(pokemonName: String) = repository.getPokemon(pokemonName)
 
