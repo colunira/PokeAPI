@@ -9,8 +9,11 @@ interface PokemonDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(pokemon: Pokemon)
 
-    @Query("SELECT name FROM pokemons ORDER BY id")
+    @Query("SELECT name FROM pokemons")
     fun getAllPokemons(): LiveData<List<String>>
+
+    @Query("SELECT name FROM pokemons WHERE isFavourite == 1")
+    fun getAllFavouritePokemons(): LiveData<List<String>>
 
     @Delete
     fun deletePokemon(pokemon: Pokemon)

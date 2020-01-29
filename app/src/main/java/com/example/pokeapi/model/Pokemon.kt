@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "pokemons")
-class Pokemon {
+class Pokemon: Comparable<Pokemon>{
     var SPEED=0
     var DEFENSE=3
     var ATTACK=4
@@ -52,10 +52,17 @@ class Pokemon {
     @SerializedName("types")
     var types: MutableList<PokemonType> = mutableListOf()
 
-    @ColumnInfo(name = "isFavourite")
+    @SerializedName("isFavourite")
     var isFavourite: Boolean = false
 
     override fun toString(): String {
-        return "$id $name"
+        return "$id $name" + when(isFavourite) {
+            true -> " <3"
+            false -> ""
+        }
+    }
+
+    override fun compareTo(other: Pokemon): Int {
+        return this.id.compareTo(other.id)
     }
 }

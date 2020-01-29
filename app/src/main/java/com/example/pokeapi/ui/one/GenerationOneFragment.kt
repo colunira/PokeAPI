@@ -30,21 +30,21 @@ class GenerationOneFragment : Fragment(), NavigableFragment {
         return inflater.inflate(R.layout.fragment_gen_one, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        generationOneViewModel.getPokemonNames(1).observe(this, Observer { names ->
-            if (names != null) {
-                generationOneViewModel.getPokemons(names).observe(this, Observer { pokes ->
-                    if (pokes != null) {
-                        pokemonList.layoutManager =
-                            LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-                        pokemonList.adapter = PokemonListAdapter(pokes, context!!,this)
-                    }
-                })
-            }
-        })
-    }
+//    override fun onActivityCreated(savedInstanceState: Bundle?) {
+//        super.onActivityCreated(savedInstanceState)
+//
+//        generationOneViewModel.getPokemonNames(1).observe(this, Observer { names ->
+//            if (names != null) {
+//                generationOneViewModel.getPokemons(names).observe(this, Observer { pokes ->
+//                    if (pokes != null) {
+//                        pokemonList.layoutManager =
+//                            LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+//                        pokemonList.adapter = PokemonListAdapter(pokes, context!!,this)
+//                    }
+//                })
+//            }
+//        })
+//    }
 
     override fun navigateToPokemon() {
         val action =

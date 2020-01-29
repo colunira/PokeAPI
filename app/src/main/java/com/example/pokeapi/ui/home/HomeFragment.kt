@@ -38,11 +38,11 @@ class HomeFragment : Fragment(), NavigableFragment {
         homeViewModel.generationID.observe(this, Observer {
             homeViewModel.getPokemonNames(homeViewModel.generationID.value!!, context).observe(this, Observer { favs ->
                 if (favs != null) {
-                    homeViewModel.getPokemons(favs).observe(this, Observer { pokes ->
+                    homeViewModel.getPokemons(favs, context!!).observe(this, Observer { pokes ->
                         if (pokes != null) {
                             pokemonList.layoutManager =
                                 LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-                            pokemonList.adapter = PokemonListAdapter(pokes, context!!, this)
+                            pokemonList.adapter = PokemonListAdapter(pokes, context!!, homeViewModel, this)
                         }
                     })
                 }

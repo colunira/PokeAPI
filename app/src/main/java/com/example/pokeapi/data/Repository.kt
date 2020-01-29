@@ -20,6 +20,7 @@ class Repository {
         }
     }
 
+    val remote = Remote()
 
     fun getPokemonNames(gen: Int, context: Context? = null): LiveData<List<String>> {
         return when (gen) {
@@ -28,15 +29,11 @@ class Repository {
                 db.pokemonDao().getAllPokemons()
             }
             in 1..4 -> {
-                val remote = Remote()
                 remote.getGeneration(gen)
             }
             else -> MutableLiveData<List<String>>()
         }
     }
 
-    fun getPokemons(pokemons: List<String>): LiveData<List<Pokemon>> {
-        val remote = Remote()
-        return remote.getPokemons(pokemons)
-    }
+    fun getPokemons(pokemons: List<String>, context: Context) = remote.getPokemons(pokemons, context)
 }
