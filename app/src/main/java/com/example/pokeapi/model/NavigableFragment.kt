@@ -1,5 +1,5 @@
 package com.example.pokeapi.model
 
 interface NavigableFragment {
-    fun navigateToPokemon()
+    fun navigateToPokemon(name: String)
 }

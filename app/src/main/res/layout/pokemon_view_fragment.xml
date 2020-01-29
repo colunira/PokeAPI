@@ -158,7 +158,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="5dp">
 
                 <TextView
                     android:id="@+id/pokemonType1"
@@ -197,7 +198,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="2dp">
@@ -211,7 +212,7 @@
                     app:srcCompat="@drawable/ic_experience" />
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/pokemonExp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -228,7 +229,7 @@
                     app:srcCompat="@drawable/ic_height" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/pokemonHeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -245,7 +246,7 @@
                     app:srcCompat="@drawable/ic_weight" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/pokemonWeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -254,17 +255,31 @@
                     android:textSize="18sp" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="Abilities" />
+
             <ListView
                 android:id="@+id/abilities"
                 android:layout_width="match_parent"
-                android:layout_height="223dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/moves"
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            </androidx.recyclerview.widget.RecyclerView>
+            </ListView>
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="Moves" />
+
+            <ListView
+                android:id="@+id/moves"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
     </LinearLayout>

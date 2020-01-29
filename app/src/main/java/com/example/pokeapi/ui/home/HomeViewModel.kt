@@ -20,6 +20,10 @@ class HomeViewModel : ViewModel() {
 
     fun getPokemons(pokemons: List<String>, context: Context) = repository.getPokemons(pokemons, context)
 
+    fun getPokemon(pokemonName: String) = repository.getPokemon(pokemonName)
+
     var generationID: MutableLiveData<Int> = MutableLiveData()
+
+    var selectedPokemonName: MutableLiveData<String> = MutableLiveData()
 
 }

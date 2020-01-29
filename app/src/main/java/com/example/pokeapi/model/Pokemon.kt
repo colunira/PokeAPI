@@ -34,11 +34,11 @@ class Pokemon: Comparable<Pokemon>{
 
     @Ignore
     @SerializedName("abilities")
-    var abilities: MutableList<Ability> = mutableListOf()
+    var abilities: MutableList<PokemonAbility> = mutableListOf()
 
     @Ignore
     @SerializedName("moves")
-    var moves: MutableList<Move> = mutableListOf()
+    var moves: MutableList<PokemonMove> = mutableListOf()
 
     @Ignore
     @SerializedName("sprites")
@@ -64,5 +64,21 @@ class Pokemon: Comparable<Pokemon>{
 
     override fun compareTo(other: Pokemon): Int {
         return this.id.compareTo(other.id)
+    }
+
+    fun getAbilitiesAsStringList(): List<String> {
+        val list: MutableList<String> = mutableListOf()
+        for (item in abilities) {
+            list.add(item.ability.name)
+        }
+        return list
+    }
+
+    fun getMovesAsStringList(): List<String> {
+        val list: MutableList<String> = mutableListOf()
+        for (item in moves) {
+            list.add(item.move.toString())
+        }
+        return list
     }
 }
