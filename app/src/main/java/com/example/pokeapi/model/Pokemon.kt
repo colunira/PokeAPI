@@ -56,6 +56,9 @@ class Pokemon {
     var isFavourite: Boolean = false
 
     override fun toString(): String {
-        return "$id $name"
+        return "$id $name" + when (isFavourite) {
+            true -> " fav"
+            false -> ""
+        }
     }
 }

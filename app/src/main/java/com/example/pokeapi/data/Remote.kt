@@ -14,8 +14,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class Remote {
+
     val retrofit = Retrofit.Builder().baseUrl("https://pokeapi.co/api/v2/")
         .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create())).build()
+
     val pokeService = retrofit.create(PokeAPI::class.java)
 
     fun getGeneration(id: Int): LiveData<List<String>> {
@@ -50,7 +52,6 @@ class Remote {
                 response: Response<Pokemon>
             ) {
                 pokemon.value = response.body()
-                Log.v("DUPA", pokemon.value!!.name)
             }
         })
 
@@ -74,7 +75,7 @@ class Remote {
                 }
             })
         }
-
         return pokemon
     }
+
 }

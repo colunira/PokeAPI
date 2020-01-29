@@ -1,15 +1,9 @@
 package com.example.pokeapi.ui.home
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.pokeapi.data.PokemonDatabase
 import com.example.pokeapi.data.Repository
-import com.example.pokeapi.model.Generation
-import com.example.pokeapi.model.Pokemon
-import com.example.pokeapi.model.PokemonSpecies
-import com.example.pokeapi.model.PokemonStat
 
 class HomeViewModel : ViewModel() {
 

@@ -6,6 +6,7 @@ import com.example.pokeapi.model.Pokemon
 
 @Dao
 interface PokemonDao {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(pokemon: Pokemon)
 
@@ -14,4 +15,5 @@ interface PokemonDao {
 
     @Delete
     fun deletePokemon(pokemon: Pokemon)
+
 }

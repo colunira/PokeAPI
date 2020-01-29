@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.pokeapi.model.NavigableFragment
 
 
-class HomeFragment : Fragment(), NavigableFragment {
+class HomeFragment : Fragment()/*, NavigableFragment*/ {
 
     private lateinit var homeViewModel: HomeViewModel
 
@@ -35,14 +35,14 @@ class HomeFragment : Fragment(), NavigableFragment {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        homeViewModel.generationID.observe(this, Observer {
-            homeViewModel.getPokemonNames(homeViewModel.generationID.value!!, context).observe(this, Observer { favs ->
-                if (favs != null) {
-                    homeViewModel.getPokemons(favs).observe(this, Observer { pokes ->
+        homeViewModel.generationID.observe(this, Observer {gen ->
+            homeViewModel.getPokemonNames(gen, context).observe(this, Observer { names ->
+                if (names != null) {
+                    homeViewModel.getPokemons(names).observe(this, Observer { pokes ->
                         if (pokes != null) {
                             pokemonList.layoutManager =
                                 LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-                            pokemonList.adapter = PokemonListAdapter(pokes, context!!, this)
+                            pokemonList.adapter = PokemonListAdapter(pokes, context!!)
                         }
                     })
                 }
@@ -57,9 +57,9 @@ class HomeFragment : Fragment(), NavigableFragment {
         )
     }
 
-    override fun navigateToPokemon() {
-        val action =
-            HomeFragmentDirections.navToPokemon()
-        this.findNavController().navigate(action)
-    }
+//    override fun navigateToPokemon() {
+//        val action =
+//            HomeFragmentDirections.navToPokemon()
+//        this.findNavController().navigate(action)
+//    }
 }
