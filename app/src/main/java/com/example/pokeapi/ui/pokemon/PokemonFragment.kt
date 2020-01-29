@@ -35,7 +35,7 @@ class PokemonFragment : Fragment() {
         val view = inflater.inflate(R.layout.pokemon_view_fragment, container, false)
         viewModel = ViewModelProviders.of(activity!!).get(HomeViewModel::class.java)
         viewModel.selectedPokemonName.observe(this, Observer { name ->
-            viewModel.getPokemon(name).observe(this, Observer { pokemon ->
+            viewModel.getPokemon(name, context!!).observe(this, Observer { pokemon ->
 
                 // Load the picture
                 picasso.load(pokemon.images.url).resize(200,200)
@@ -65,6 +65,7 @@ class PokemonFragment : Fragment() {
                     view.pokemonType2.text = ""
                     view.pokemonType2.setBackgroundColor(Color.TRANSPARENT)
                 }
+                if (pokemon.isFavourite) view.favourite.setImageResource(R.drawable.ic_star)
 
                 // setup the abilities
                 val abilitiesAdapter = ArrayAdapter<String>(
@@ -84,7 +85,19 @@ class PokemonFragment : Fragment() {
 
                 // set on click listener
                 view.favourite.setOnClickListener {
-                    // TODO: obsłużyć favourite
+                    if (pokemon.isFavourite) {
+                        pokemon.isFavourite = false
+                        view.favourite.setImageResource(R.drawable.ic_star_unchecked)
+                        Thread {
+                            viewModel.unlikePokemon(pokemon, context!!)
+                        }.start()
+                    } else {
+                        pokemon.isFavourite = true
+                        view.favourite.setImageResource(R.drawable.ic_star)
+                        Thread {
+                            viewModel.setFavouritePokemon(pokemon, context!!)
+                        }.start()
+                    }
                 }
             })
         })
