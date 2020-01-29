@@ -6,8 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 
 import com.example.pokeapi.R
+import com.example.pokeapi.ui.home.HomeViewModel
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.pokemon_view_fragment.view.*
+import android.widget.ArrayAdapter
+
+
 
 class PokemonFragment : Fragment() {
 
@@ -15,19 +22,60 @@ class PokemonFragment : Fragment() {
         fun newInstance() = PokemonFragment()
     }
 
-    private lateinit var viewModel: PokemonViewModel
+    val picasso = Picasso.get()
+
+    private lateinit var viewModel: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.pokemon_view_fragment, container, false)
-    }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(PokemonViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+        val view = inflater.inflate(R.layout.pokemon_view_fragment, container, false)
+        viewModel = ViewModelProviders.of(activity!!).get(HomeViewModel::class.java)
+        viewModel.selectedPokemonName.observe(this, Observer { name ->
+            viewModel.getPokemon(name).observe(this, Observer { pokemon ->
 
+                // Load the picture
+                picasso.load(pokemon.images.url).resize(200,200)
+                    .into(view.imageView9)
+
+                //Load pokemon data
+                view.pokemonName.text=pokemon.name
+                view.pokemonAttack.text=pokemon.stats[pokemon.ATTACK].value.toString()
+                view.pokemonDefense.text=pokemon.stats[pokemon.DEFENSE].value.toString()
+                view.pokemonHP.text=pokemon.stats[pokemon.HP].value.toString()
+                view.pokemonSpeed.text=pokemon.stats[pokemon.SPEED].value.toString()
+                view.pokemonWeight.text="${pokemon.weight} hg"
+                view.pokemonHeight.text="${pokemon.height} dm"
+                view.pokemonExp.text="${pokemon.experience} EXP"
+                view.pokemonType1.text=pokemon.types[0].type.name
+                if (pokemon.types.size>1) {
+                    view.pokemonType2.text=pokemon.types[1].type.name
+                }
+
+                // setup the abilities
+                val abilitiesAdapter = ArrayAdapter<String>(
+                    this.context!!,
+                    R.layout.list_view_item,
+                    pokemon.getAbilitiesAsStringList()
+                )
+                view.abilities.adapter=abilitiesAdapter
+
+                // setup the moves
+                val movesAdapter = ArrayAdapter<String>(
+                    this.context!!,
+                    R.layout.list_view_item,
+                    pokemon.getMovesAsStringList()
+                )
+                view.moves.adapter=movesAdapter
+
+                // set on click listener
+                view.favourite.setOnClickListener {
+                    // TODO: obsłużyć favourite
+                }
+            })
+        })
+        return view
+    }
 }

@@ -73,7 +73,7 @@ class PokemonListAdapter(
 
 
         holder.itemView.setOnClickListener {
-            parent.navigateToPokemon()
+            parent.navigateToPokemon(pokemon.name)
         }
     }
 

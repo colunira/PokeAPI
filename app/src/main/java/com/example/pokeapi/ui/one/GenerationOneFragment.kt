@@ -16,7 +16,7 @@ import com.example.pokeapi.model.NavigableFragment
 import com.example.pokeapi.ui.home.HomeFragmentDirections
 import kotlinx.android.synthetic.main.fragment_gen_one.*
 
-class GenerationOneFragment : Fragment(), NavigableFragment {
+class GenerationOneFragment : Fragment() {
 
     private lateinit var generationOneViewModel: GenerationOneViewModel
 
@@ -32,23 +32,6 @@ class GenerationOneFragment : Fragment(), NavigableFragment {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        generationOneViewModel.getPokemonNames(1).observe(this, Observer { names ->
-            if (names != null) {
-                generationOneViewModel.getPokemons(names).observe(this, Observer { pokes ->
-                    if (pokes != null) {
-                        pokemonList.layoutManager =
-                            LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-                        pokemonList.adapter = PokemonListAdapter(pokes, context!!,this)
-                    }
-                })
-            }
-        })
     }
 
-    override fun navigateToPokemon() {
-        val action =
-            HomeFragmentDirections.navToPokemon()
-        this.findNavController().navigate(action)
-    }
 }

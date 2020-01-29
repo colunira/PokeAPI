@@ -39,4 +39,9 @@ class Repository {
         val remote = Remote()
         return remote.getPokemons(pokemons)
     }
+
+    fun getPokemon(pokemonName: String): LiveData<Pokemon> {
+        val remote = Remote()
+        return remote.getPokemon(pokemonName)
+    }
 }

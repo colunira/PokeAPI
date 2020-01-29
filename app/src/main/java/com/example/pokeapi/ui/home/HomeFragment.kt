@@ -57,9 +57,10 @@ class HomeFragment : Fragment(), NavigableFragment {
         )
     }
 
-    override fun navigateToPokemon() {
+    override fun navigateToPokemon(name: String) {
         val action =
             HomeFragmentDirections.navToPokemon()
         this.findNavController().navigate(action)
+        homeViewModel.selectedPokemonName.value=name
     }
 }
